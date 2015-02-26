@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	     xmlns:aop="http://www.springframework.org/schema/aop"
+	     xmlns:tx="http://www.springframework.org/schema/tx"
+	     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+
+	<!-- 配置数据源 -->
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName"
+			value="com.mysql.jdbc.Driver">
+		</property>
+		<property name="url" value="jdbc:mysql://localhost:3306/test"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="1"></property>
+			<!-- 可调整 -->
+		<property name="initialSize" value="2"></property>
+		<!-- 可调整 -->
+		<property name="maxActive" value="3"></property>
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>com/sise/pojo/TbUserDetail.hbm.xml</value>
+				<value>com/sise/pojo/Users.hbm.xml</value>
+				<value>com/sise/pojo/TbUser.hbm.xml</value></list>
+		</property></bean>
+		
+		<!-- 注入hibernateTemplate -->
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<!-- 配置事务管理器来管理hibernate -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	
+	<!-- 配置了AOP和事物通知，此处只配置了切入方法 -->
+	<tx:advice id="adviceBack" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="execute*" propagation="REQUIRED" />
+			<!--
+				对所有以execute开头的方法添加事务
+			-->
+			<tx:method name="insert*" propagation="REQUIRED" />
+			<!--
+				对所有以insert开头的方法添加事务
+			-->
+			<tx:method name="update*" propagation="REQUIRED" />
+			<!--
+				对所有以update方法添加事务
+			-->
+			<tx:method name="delete*" propagation="REQUIRED" />
+			<!--
+				对所有以delete方法添加事务
+			-->
+			<tx:method name="*" propagation="SUPPORTS" read-only="true" />
+			<!--
+				对其他方法，不强求自动添加事务
+			-->
+		</tx:attributes>
+	</tx:advice>
+
+	<aop:config>
+		<aop:pointcut expression="execution(* com.sise.dao.impl.*.*(..))" id="point"/><!--对dao.impl中的所有类的所有方法检查事物 -->
+		<aop:advisor advice-ref="adviceBack" pointcut-ref="point"/>
+	</aop:config>
+	
+	
+	
+	<!-- 依赖注入 -->
+
+<!-- tb_user -->
+	<!-- 数据持久层 -->
+		<bean id="tbUserDao" class="com.sise.dao.imp.TbUserDao">
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+		</bean>
+	<!-- 服务层 -->
+		<bean id="tbUserService" class="com.sise.service.imp.TbUserService">
+		<property name="tbUserDao" ref="tbUserDao"></property>
+		<property name="tbUserDetailService" ref="tbUserDetailService"></property>
+		</bean>
+	<!-- 控制层 -->
+		<bean id="tbUserAction" class="com.sise.action.TbUserAction">
+		<property name="tbUserService" ref="tbUserService"></property>
+		</bean>
+	
+	
+<!-- tb_user_detail -->
+	<!-- 数据持久层 -->
+		<bean id="tbUserDetailDao" class="com.sise.dao.imp.TbUserDetailDao">
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+		</bean>
+	<!-- 服务层 -->
+		<bean id="tbUserDetailService" class="com.sise.service.imp.TbUserDetailService">
+		<property name="tbUserDetailDao" ref="tbUserDetailDao"></property>
+		<property name="tbUserService" ref="tbUserService"></property>
+		</bean>
+	<!-- 控制层 -->
+		<bean id="tbUserDetailAction" class="com.sise.action.TbUserDetailAction">
+		<property name="tbUserDetailService" ref="tbUserDetailService"></property>
+		<property name="tbUserService" ref="tbUserService"></property>
+		</bean>
+		
+		
+		<!-- users -->
+	<!-- 数据持久层 -->
+		<bean id="usersDao" class="com.sise.dao.imp.UsersDao">
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+		</bean>
+	<!-- 服务层 -->
+		<bean id="usersService" class="com.sise.service.imp.UsersService">
+		<property name="usersDao" ref="usersDao"></property>
+		</bean>
+	<!-- 控制层 -->
+		<bean id="usersAction" class="com.sise.action.UsersAction">
+		<property name="usersService" ref="usersService"></property>
+		</bean>
+		
+		
+		
+		<!-- problem -->
+	<!-- 数据持久层 -->
+		<bean id="problemDao" class="com.sise.dao.imp.ProblemDao">
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+		</bean>
+	<!-- 服务层 -->
+		<bean id="problemService" class="com.sise.service.imp.ProblemService">
+		<property name="problemDao" ref="problemDao"></property>
+		</bean>
+	<!-- 控制层 -->
+		<bean id="problemAction" class="com.sise.action.ProblemAction">
+		<property name="problemService" ref="problemService"></property>
+		</bean>
+		
+		
+		<!-- rejudge -->
+		<bean id="rejudge" class="com.sise.action.RejudgeAction">
+		</bean>
+	
+	</beans>
