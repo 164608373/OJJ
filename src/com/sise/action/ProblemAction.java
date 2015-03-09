@@ -1,7 +1,12 @@
 package com.sise.action;
 
+import java.sql.Timestamp;
+import java.util.List;
+
 import com.opensymphony.xwork2.ActionSupport;
+import com.sise.pojo.Problem;
 import com.sise.service.imp.ProblemService;
+import com.sise.util.Page;
 
 public class ProblemAction extends ActionSupport{
  //problem控制层对象
@@ -13,7 +18,7 @@ public class ProblemAction extends ActionSupport{
 	
 	private ProblemService problemService;//problem服务层实现对象
 	
-	private String problemid;//问题id
+	private String problemId;//问题id
 	private String title;//题目
 	private String input;//输入
 	private String output;//输出
@@ -22,6 +27,14 @@ public class ProblemAction extends ActionSupport{
 	private String sample_input;//案例输入
 	private String sample_output;//案例输出
 	private String hint;//提示
+	private String timelimit;//时间限制
+	private String memorylimit;//内存限制
+	private String description;//描述
+	
+	private String curPage;
+	private Page page;
+	private String message;
+	private List<Problem> problemlist;
 	
 	public ProblemService getProblemService() {
 		return problemService;
@@ -29,11 +42,56 @@ public class ProblemAction extends ActionSupport{
 	public void setProblemService(ProblemService problemService) {
 		this.problemService = problemService;
 	}
-	public String getProblemid() {
-		return problemid;
+	
+	
+	
+	public String getProblemId() {
+		return problemId;
 	}
-	public void setProblemid(String problemid) {
-		this.problemid = problemid;
+	public void setProblemId(String problemId) {
+		this.problemId = problemId;
+	}
+	public String getCurPage() {
+		return curPage;
+	}
+	public void setCurPage(String curPage) {
+		this.curPage = curPage;
+	}
+	public Page getPage() {
+		return page;
+	}
+	public void setPage(Page page) {
+		this.page = page;
+	}
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	public List<Problem> getProblemlist() {
+		return problemlist;
+	}
+	public void setProblemlist(List<Problem> problemlist) {
+		this.problemlist = problemlist;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public String getTimelimit() {
+		return timelimit;
+	}
+	public void setTimelimit(String timelimit) {
+		this.timelimit = timelimit;
+	}
+	public String getMemorylimit() {
+		return memorylimit;
+	}
+	public void setMemorylimit(String memorylimit) {
+		this.memorylimit = memorylimit;
 	}
 	public String getTitle() {
 		return title;
@@ -89,26 +147,137 @@ public class ProblemAction extends ActionSupport{
 	 * @return
 	 */
 	public String addProblem(){
-		return null;
+		Problem problem = new Problem();
+		
+		problem.setDescription(description);
+		problem.setHint(hint);
+		problem.setInDate(new Timestamp(System.currentTimeMillis()));
+		problem.setInput(input);
+		problem.setOutput(output);
+		problem.setInputPath("D:/data/temp");
+		problem.setOutputPath("D:/data/temp");
+		problem.setMemoryLimit(Integer.valueOf(memorylimit));
+		problem.setTitle(title);
+		problem.setSampleInput(sample_input);
+		problem.setSampleOutput(sample_output);
+		problem.setTimeLimit(Integer.valueOf(timelimit));
+		problem.setRatio(new Short("0"));
+		problem.setDifficulty(new Short("0"));
+		problem.setAccepted(0);
+		problem.setSolved(0);
+		problem.setSubmit(0);
+		
+		problemService.addProblem(problem);
+		
+		return "addProblemOK";
 	}
 	
 	/**
-	 * 查询问题
+	 * 管理员查询问题
 	 */
-	public String queryProblem(){
-		return null;
+	public String queryProblemadmin(){
+		//获取当前页数
+		 page=new Page();
+		
+		
+		int totalCount = 0;
+		//获取有多少条留言
+		totalCount = problemService.getMessageCount();
+		
+		//存好总条数进入page对象中
+		page.setTotalCount(totalCount);
+		
+		if(curPage!=null){
+			page.setCurrentPage(Integer.valueOf(curPage));
+		}
+		
+		//分页查询留言板信息
+		try {
+			problemlist = problemService.queryPage(page);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "queryokadmin";
 	}
+	
+	/**
+	 * 用户查询问题
+	 */
+	public String queryProblemuser(){
+		//获取当前页数
+		 page=new Page();
+		
+		
+		int totalCount = 0;
+		//获取有多少条留言
+		totalCount = problemService.getMessageCount();
+		
+		//存好总条数进入page对象中
+		page.setTotalCount(totalCount);
+		
+		if(curPage!=null){
+			page.setCurrentPage(Integer.valueOf(curPage));
+		}
+		
+		//分页查询留言板信息
+		try {
+			problemlist = problemService.queryPage(page);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "queryokuser";
+	}
+	
 	/**
 	 * 修改问题
 	 */
 	public String editProblem(){
-		return null;
+		Problem problem = new Problem();
+		problem.setProblemId(Integer.valueOf(problemId));
+	
+		problem.setDescription(description);
+		problem.setHint(hint);
+		problem.setInDate(new Timestamp(System.currentTimeMillis()));
+		problem.setInput(input);
+		problem.setOutput(output);
+		problem.setInputPath("D:/data/temp");
+		problem.setOutputPath("D:/data/temp");
+		problem.setMemoryLimit(Integer.valueOf(memorylimit));
+		problem.setTitle(title);
+		problem.setSampleInput(sample_input);
+		problem.setSampleOutput(sample_output);
+		problem.setTimeLimit(Integer.valueOf(timelimit));
+		problem.setRatio(new Short("0"));
+		problem.setDifficulty(new Short("0"));
+		problem.setAccepted(0);
+		problem.setSolved(0);
+		problem.setSubmit(0);
+		
+		
+		problemService.updateProblem(problem);
+		
+		return "editProblemOk";
 	}
 	/**
 	 * 删除问题
 	 */
 	public String deleteProblem(){
-		return null;
+		
+		Problem problem = new Problem();
+		
+		problem.setProblemId(Integer.valueOf(problemId));
+		
+		problemService.deleteProblem(problem);
+		
+		return "deleteOk";
 	}
 
+	
+	public String queryProblem(){
+		
+		
+		return "queryok";
+	}
 }

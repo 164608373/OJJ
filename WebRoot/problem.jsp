@@ -1,10 +1,8 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"  contentType="text/html;charset=utf-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-request.setCharacterEncoding("utf-8");
-response.setCharacterEncoding("utf-8");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -12,16 +10,15 @@ response.setCharacterEncoding("utf-8");
   <head>
     <base href="<%=basePath%>">
     
-    <title>更新用户信息界面</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>问题列表</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-	
-	
 	<script src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/index.js"></script>
 	<script type="text/javascript">
@@ -43,8 +40,9 @@ $(document).ready(function(){
    
 });
 </script>
-	
   </head>
+  
+  <body>
   
   <table border="1">
   <tr>
@@ -55,8 +53,8 @@ $(document).ready(function(){
   </tr>
   <tr align="center">
   <td><a href="board_queryPage.action">留言板</a></td>
-  <td><a href="">问题</a></td>
-  <td><a href="user/Register.jsp">注册</a></td>
+  <td><a href="problem_queryProblemuser.action">问题</a></td>
+  <td><a href="Register.jsp">注册</a></td>
   <c:if test="${sessionScope.user != null}"><td>welcome</td></c:if>
   <c:if test="${sessionScope.user == null}"><td>Id<input id="username" name="userName" type="text"></td></c:if>
   </tr>
@@ -82,32 +80,50 @@ $(document).ready(function(){
   </tr>
   </table>
   <br>
-  	<form action="users_updateUser.action" method="post">
-  	<table border="1" align="center">
-  		<tr>
-  		<td>I d：</td><td><input id="username" name="userName" type="text" value="${sessionScope.user.userId }" disabled="disabled"></td>
-  		</tr>
-  		<tr>
-  		<td>小 名:</td><td><input id="nickName" name="nickName" type="text" value="${sessionScope.user.nick }"></td>
-  		</tr>
-  		<tr>
-  		<td>密  码：</td><td><input id="password" name="password" type="password" value="${sessionScope.user.password }"></td>
-  		</tr>
-  		<tr>
-  		<td>重复密码：</td><td><input id="repassword" name="repassword" type="password" value="${sessionScope.user.password }"></td>
-  		</tr>
-  		<tr>
-  		<td>学 校：</td><td><input id="school" name="school" type="text" value="${sessionScope.user.school }"></td>
-  		</tr>
-  		<tr>
-  		<td>Email：</td><td><input id="email" name="email" type="text" value="${sessionScope.user.email }"></td>
-  		</tr>
-  		<tr>
-  			<td colspan="2" align="right"><input type="button" value="更新" onclick="submit()"/><input type="button" value="重置" id="updateReSet"/></td>
-  		</tr>
-
-  	</table>
-  		<center><h3><font color="red">${requestScope.msg}</font></h3></center>
-  	</form>
+  <table width="780">
+  <tr align="center" ><td>问题id</td><td>题目</td><td>发表时间</td></tr>
+  			<tr>
+  				<c:forEach  items="${problemlist}" var="problem" >
+				<tr >
+					<th>${problem.problemId}</th>
+					<th><a href="">${problem.title}</a></th>
+					<th>${problem.inDate}</th>
+				</tr>
+					</c:forEach>
+			</tr>
+  			<tr>
+  				<th colspan="3"><center>
+  					<a href="problem_queryProblemuser.action?curPage=1" style='TEXT-DECORATION:none;'>&nbsp;首页&nbsp;</a>
+    <a href="problem_queryProblemuser.action?curPage=${page.currentPage-1 }" style='TEXT-DECORATION:none;'>&nbsp;上一页&nbsp;</a>
+    <a href="problem_queryProblemuser.action?curPage=${page.currentPage+1 }" style='TEXT-DECORATION:none;'>&nbsp;下一页&nbsp;</a>
+    <a href="problem_queryProblemuser.action?curPage=${page.totalPage }" style='TEXT-DECORATION:none;'>&nbsp;尾页&nbsp;</a>
+   	<script type="text/javascript">
+   		function goPage(sel){
+   			location.href='problem_queryProblemuser.action?curPage='+sel.value;
+   		}
+   	</script> 
+    当前是第
+    <select onchange="goPage(this)">
+	    <c:forEach begin="1" end="${page.totalPage }" var="v">
+	    	<c:if test="${v == page.currentPage}">
+	    		<option value="${v }" selected="selected">${v }</option>
+	    	</c:if>
+	    	<c:if test="${v != page.currentPage}">
+	    		<option value="${v }" >${v }</option>
+	    	</c:if>
+	    </c:forEach>
+    </select> 
+    页 
+  				</center></th>
+  			</tr>
+  			
+  			<tr>
+  				<th colspan="3">
+  					总页数:【${page.totalPage }】页&nbsp;总条数:【${page.totalCount }】条
+  				</th>
+  			</tr>
+  			
+  		</table>
+ 
   </body>
 </html>

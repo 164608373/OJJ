@@ -60,7 +60,7 @@ $(document).ready(function(){
   </tr>
   <tr align="center">
   <td><a href="board_queryPage.action">留言板</a></td>
-  <td><a href="">问题</a></td>
+  <td><a href="problem_queryProblemuser.action">问题</a></td>
   <td><a href="Register.jsp">注册</a></td>
   <c:if test="${sessionScope.user != null}"><td>welcome</td></c:if>
   <c:if test="${sessionScope.user == null}"><td>Id<input id="username" name="userName" type="text"></td></c:if>

@@ -17,20 +17,33 @@
 		
 		<!-- usersAction -->
 		<action name="users_*" class="usersAction" method="{1}">
-			<result name="loginFail">user/login.jsp</result>
+			<result name="loginFail">login.jsp</result>
 			<result name="loginOk">/index.jsp</result>
 			<result name="logout">/index.jsp</result>
-			<result name="isNotLogin">user/updateUser.jsp</result>
-			<result name="registerFali">user/Register.jsp</result>
+			<result name="isNotLogin">updateUser.jsp</result>
+			<result name="registerFali">Register.jsp</result>
 		</action>
 		
 		
 		<!-- problemAction -->
 		<action name="problem_*" class="problemAction" method="{1}">
+			<result name="addProblemOK">addproblemok.jsp</result>
+			<result name="queryokadmin">editproblem.jsp</result>
+			<result name="queryokuser">problem.jsp</result>
+			<result name="deleteOk">deleteproblemok.jsp</result>
+			
+		
 		</action>
 		
 		<!--judgeAction -->
 		<action name="rejudge_*" class="rejudge" method="{1}">
+		</action>
+		
+		<!-- boardAction -->
+		<action name="board_*" class="boardAction" method="{1}">
+		         <result name="postFail">login.jsp</result>
+		         <result name="postSuccess">querypageMessage.jsp</result>
+		         <result name="queryMessageSucced">board.jsp</result>
 		</action>
 	</package>
 
