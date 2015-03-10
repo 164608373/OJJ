@@ -35,10 +35,9 @@
 		</property>
 		<property name="mappingResources">
 			<list>
-				<value>com/sise/pojo/TbUserDetail.hbm.xml</value>
+			
 				<value>com/sise/pojo/Users.hbm.xml</value>
 				<value>com/sise/pojo/Board.hbm.xml</value>
-				<value>com/sise/pojo/TbUser.hbm.xml</value>
 				<value>com/sise/pojo/Problem.hbm.xml</value>
 			</list>
 		</property></bean>
@@ -91,38 +90,7 @@
 	
 	<!-- 依赖注入 -->
 
-<!-- tb_user -->
-	<!-- 数据持久层 -->
-		<bean id="tbUserDao" class="com.sise.dao.imp.TbUserDao">
-		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
-		</bean>
-	<!-- 服务层 -->
-		<bean id="tbUserService" class="com.sise.service.imp.TbUserService">
-		<property name="tbUserDao" ref="tbUserDao"></property>
-		<property name="tbUserDetailService" ref="tbUserDetailService"></property>
-		</bean>
-	<!-- 控制层 -->
-		<bean id="tbUserAction" class="com.sise.action.TbUserAction">
-		<property name="tbUserService" ref="tbUserService"></property>
-		</bean>
-	
-	
-<!-- tb_user_detail -->
-	<!-- 数据持久层 -->
-		<bean id="tbUserDetailDao" class="com.sise.dao.imp.TbUserDetailDao">
-		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
-		</bean>
-	<!-- 服务层 -->
-		<bean id="tbUserDetailService" class="com.sise.service.imp.TbUserDetailService">
-		<property name="tbUserDetailDao" ref="tbUserDetailDao"></property>
-		<property name="tbUserService" ref="tbUserService"></property>
-		</bean>
-	<!-- 控制层 -->
-		<bean id="tbUserDetailAction" class="com.sise.action.TbUserDetailAction">
-		<property name="tbUserDetailService" ref="tbUserDetailService"></property>
-		<property name="tbUserService" ref="tbUserService"></property>
-		</bean>
-		
+
 		
 		<!-- users -->
 	<!-- 数据持久层 -->

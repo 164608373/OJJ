@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>问题列表</title>
+    <title>提交问题页面</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -80,23 +80,25 @@ $(document).ready(function(){
   </tr>
   </table>
   <br>
-   <form method="POST" action="problem_queryProblemPreSubmit.action">
-<p align="center"><font size="4" color="#333399"> Problem</font></p>
-<input type="hidden" name="problemId" value="${requestScope.problem.problemId}" >
-<p align="left">Problem Id:${requestScope.problem.problemId}</p>
-<p align="left">Title:<textarea name="title" rows="1" cols="71" disabled="disabled">${requestScope.problem.title}</textarea></p>
-<p align="left">Time Limit:<input type="text" name="timelimit" size="20" value="${requestScope.problem.timeLimit}" disabled="disabled">MS</p>
-<p align="left">Memory Limit:<input type="text" name="memorylimit" size="20" value="${requestScope.problem.memoryLimit}" disabled="disabled">KByte</p>
-<p align="left">Description:<br><textarea rows="13" name="description" cols="120" disabled="disabled">${requestScope.problem.description}</textarea></p>
-<p align="left">Input:<br><textarea rows="13" name="input" cols="120" disabled="disabled">${requestScope.problem.input}</textarea></p>
-<p align="left">Output:<br><textarea rows="13" name="output" cols="120" disabled="disabled">${requestScope.problem.output}</textarea></p>
-<p align="left">Sample Input:<br><textarea rows="13" name="sample_input" cols="120" disabled="disabled">${requestScope.problem.sampleInput}</textarea></p>
-<p align="left">Sample Output:<br><textarea rows="13" name="sample_output" cols="120" disabled="disabled">${requestScope.problem.sampleOutput}</textarea></p>
-<p align="left">Hint:<br><textarea rows="13" name="hint" cols="120" disabled="disabled">${requestScope.problem.hint}</textarea></p>
-
+  
+  
+    <table border="0" width="980" ><tbody><tr><td>
+<form method="POST" action="./submit">
+<p align="center"><font size="4" color="#333399">Submit Your Solution Via Web</font></p>
+<p align="center">
+Problem ID:<input type="text" name="problem_id" value="${problem.problemId}" size="20" accesskey="p" disabled="disabled"><br>
+Language:<select size="1" name="language" style="width:100;" >
+<option value="0" >G++</option>
+<option value="1">GCC</option>
+<option value="2">Pascal</option>
+</select><br>
+</p><p align="center">
+Source: <br>
+<textarea rows="30" name="source" cols="79" accesskey="c"></textarea></p>
 <div align="center">
-<input type="submit" value="提交" name="submit">
-</div></form>
- 
+<pre><input type="submit" value="Submit" name="submit" accesskey="s"><input type="reset" value="Reset" name="reset"></pre>
+</div>
+</form>
+</td></tr></tbody></table>
   </body>
 </html>

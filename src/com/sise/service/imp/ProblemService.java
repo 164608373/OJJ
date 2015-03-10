@@ -61,4 +61,11 @@ public class ProblemService implements IProblemService{
 	public void updateProblem(Problem problem){
 		problemDao.update(problem);
 	}
+	
+	/**
+	 * 根据ID查询问题
+	 */
+	public Problem queryProblem(String id){
+		return (Problem) problemDao.query("From Problem p where p.problemId="+id).get(0);
+	}
 }

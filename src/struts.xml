@@ -4,16 +4,7 @@
 
 	<package name="default"  extends="struts-default" namespace="/">
 		
-		<!-- tb_userAction -->
-		<action name="tbUser_*" class="tbUserAction" method="{1}">
-			
-		</action>
 		
-		<!-- tb_user_detailAction -->
-		<action name="tbUserDetail_*" class="tbUserDetailAction" method="{1}">
-			<result name="queryAllOk">/userDetail.jsp</result>
-			<result name="loadOk">/updateUser.jsp</result>
-		</action>
 		
 		<!-- usersAction -->
 		<action name="users_*" class="usersAction" method="{1}">
@@ -28,11 +19,13 @@
 		<!-- problemAction -->
 		<action name="problem_*" class="problemAction" method="{1}">
 			<result name="addProblemOK">addproblemok.jsp</result>
-			<result name="queryokadmin">editproblem.jsp</result>
-			<result name="queryokuser">problem.jsp</result>
+			<result name="queryokadmin">editproblemlist.jsp</result>
+			<result name="queryokuser">problemlist.jsp</result>
+			<result name="queryProblemUser">problem.jsp</result>
 			<result name="deleteOk">deleteproblemok.jsp</result>
-			
-		
+			<result name="queryOk">updateproblem.jsp</result>
+			<result name="updateProblemOk">updateproblemok.jsp</result>
+			<result name="presubmit">submit.jsp</result>
 		</action>
 		
 		<!--judgeAction -->

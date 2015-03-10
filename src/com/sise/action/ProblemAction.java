@@ -35,6 +35,7 @@ public class ProblemAction extends ActionSupport{
 	private Page page;
 	private String message;
 	private List<Problem> problemlist;
+	private Problem problem;
 	
 	public ProblemService getProblemService() {
 		return problemService;
@@ -45,6 +46,12 @@ public class ProblemAction extends ActionSupport{
 	
 	
 	
+	public Problem getProblem() {
+		return problem;
+	}
+	public void setProblem(Problem problem) {
+		this.problem = problem;
+	}
 	public String getProblemId() {
 		return problemId;
 	}
@@ -233,7 +240,7 @@ public class ProblemAction extends ActionSupport{
 	/**
 	 * 修改问题
 	 */
-	public String editProblem(){
+	public String updateProblem(){
 		Problem problem = new Problem();
 		problem.setProblemId(Integer.valueOf(problemId));
 	
@@ -258,7 +265,7 @@ public class ProblemAction extends ActionSupport{
 		
 		problemService.updateProblem(problem);
 		
-		return "editProblemOk";
+		return "updateProblemOk";
 	}
 	/**
 	 * 删除问题
@@ -274,10 +281,31 @@ public class ProblemAction extends ActionSupport{
 		return "deleteOk";
 	}
 
-	
+	/**
+	 * 根据问题id查询问题到编辑问题页面
+	 * @return
+	 */
 	public String queryProblem(){
-		
-		
-		return "queryok";
+		problem = problemService.queryProblem(problemId);
+		return "queryOk";
 	}
+	
+	/**
+	 * 根据问题id查询问题到用户页面
+	 * @return
+	 */
+	public String queryProblemUser(){
+		problem = problemService.queryProblem(problemId);
+		return "queryProblemUser";
+	}
+	
+	/**
+	 * 根据问题id跳转到提交问题前页面
+	 * @return
+	 */
+	public String queryProblemPreSubmit(){
+		problem = problemService.queryProblem(problemId);
+		return "presubmit";
+	}
+	
 }

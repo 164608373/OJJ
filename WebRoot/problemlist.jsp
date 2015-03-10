@@ -80,23 +80,50 @@ $(document).ready(function(){
   </tr>
   </table>
   <br>
-   <form method="POST" action="problem_queryProblemPreSubmit.action">
-<p align="center"><font size="4" color="#333399"> Problem</font></p>
-<input type="hidden" name="problemId" value="${requestScope.problem.problemId}" >
-<p align="left">Problem Id:${requestScope.problem.problemId}</p>
-<p align="left">Title:<textarea name="title" rows="1" cols="71" disabled="disabled">${requestScope.problem.title}</textarea></p>
-<p align="left">Time Limit:<input type="text" name="timelimit" size="20" value="${requestScope.problem.timeLimit}" disabled="disabled">MS</p>
-<p align="left">Memory Limit:<input type="text" name="memorylimit" size="20" value="${requestScope.problem.memoryLimit}" disabled="disabled">KByte</p>
-<p align="left">Description:<br><textarea rows="13" name="description" cols="120" disabled="disabled">${requestScope.problem.description}</textarea></p>
-<p align="left">Input:<br><textarea rows="13" name="input" cols="120" disabled="disabled">${requestScope.problem.input}</textarea></p>
-<p align="left">Output:<br><textarea rows="13" name="output" cols="120" disabled="disabled">${requestScope.problem.output}</textarea></p>
-<p align="left">Sample Input:<br><textarea rows="13" name="sample_input" cols="120" disabled="disabled">${requestScope.problem.sampleInput}</textarea></p>
-<p align="left">Sample Output:<br><textarea rows="13" name="sample_output" cols="120" disabled="disabled">${requestScope.problem.sampleOutput}</textarea></p>
-<p align="left">Hint:<br><textarea rows="13" name="hint" cols="120" disabled="disabled">${requestScope.problem.hint}</textarea></p>
-
-<div align="center">
-<input type="submit" value="提交" name="submit">
-</div></form>
+  <table width="780">
+  <tr align="center" ><td>问题id</td><td>题目</td><td>发表时间</td></tr>
+  			<tr>
+  				<c:forEach  items="${problemlist}" var="problem" >
+				<tr >
+					<th>${problem.problemId}</th>
+					<th><a href="problem_queryProblemUser.action?problemId=${problem.problemId}">${problem.title}</a></th>
+					<th>${problem.inDate}</th>
+				</tr>
+					</c:forEach>
+			</tr>
+  			<tr>
+  				<th colspan="3"><center>
+  					<a href="problem_queryProblemuser.action?curPage=1" style='TEXT-DECORATION:none;'>&nbsp;首页&nbsp;</a>
+    <a href="problem_queryProblemuser.action?curPage=${page.currentPage-1 }" style='TEXT-DECORATION:none;'>&nbsp;上一页&nbsp;</a>
+    <a href="problem_queryProblemuser.action?curPage=${page.currentPage+1 }" style='TEXT-DECORATION:none;'>&nbsp;下一页&nbsp;</a>
+    <a href="problem_queryProblemuser.action?curPage=${page.totalPage }" style='TEXT-DECORATION:none;'>&nbsp;尾页&nbsp;</a>
+   	<script type="text/javascript">
+   		function goPage(sel){
+   			location.href='problem_queryProblemuser.action?curPage='+sel.value;
+   		}
+   	</script> 
+    当前是第
+    <select onchange="goPage(this)">
+	    <c:forEach begin="1" end="${page.totalPage }" var="v">
+	    	<c:if test="${v == page.currentPage}">
+	    		<option value="${v }" selected="selected">${v }</option>
+	    	</c:if>
+	    	<c:if test="${v != page.currentPage}">
+	    		<option value="${v }" >${v }</option>
+	    	</c:if>
+	    </c:forEach>
+    </select> 
+    页 
+  				</center></th>
+  			</tr>
+  			
+  			<tr>
+  				<th colspan="3">
+  					总页数:【${page.totalPage }】页&nbsp;总条数:【${page.totalCount }】条
+  				</th>
+  			</tr>
+  			
+  		</table>
  
   </body>
 </html>
