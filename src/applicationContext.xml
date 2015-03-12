@@ -18,6 +18,7 @@
 		<property name="password" value="1"></property>
 			<!-- 可调整 -->
 		<property name="initialSize" value="2"></property>
+		 
 		<!-- 可调整 -->
 		<property name="maxActive" value="3"></property>
 	</bean>
@@ -28,6 +29,7 @@
 		</property>
 		<property name="hibernateProperties">
 			<props>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
 				<prop key="hibernate.dialect">
 					org.hibernate.dialect.MySQLDialect
 				</prop>
@@ -39,6 +41,7 @@
 				<value>com/sise/pojo/Users.hbm.xml</value>
 				<value>com/sise/pojo/Board.hbm.xml</value>
 				<value>com/sise/pojo/Problem.hbm.xml</value>
+				<value>com/sise/pojo/Compileinfo.hbm.xml</value>
 			</list>
 		</property></bean>
 		
@@ -125,6 +128,8 @@
 		
 		<!-- rejudge -->
 		<bean id="rejudge" class="com.sise.action.RejudgeAction">
+		<property name="problemService" ref="problemService"></property>
+		<property name="compileinfoService" ref="compileinfoService"></property>
 		</bean>
 
 		<!-- board -->
@@ -139,6 +144,21 @@
 		<!-- 控制层 -->
 		<bean id="boardAction" class="com.sise.action.BoardAction">
 		<property name="boardService" ref="boardService"></property>
+		</bean>
+		
+		
+		<!-- compileinfo -->
+		<!-- 数据持久层 -->
+		<bean id="compileinfoDao" class="com.sise.dao.imp.CompileinfoDao">
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+		</bean>
+		<!-- 服务层 -->
+		<bean id="compileinfoService" class="com.sise.service.imp.CompileinfoService">
+		<property name="compileinfoDao" ref="compileinfoDao"></property>
+		</bean>
+		<!-- 控制层 -->
+		<bean id="CompileinfoAction" class="com.sise.action.CompileinfoAction">
+		<property name="compileinfoService" ref="compileinfoService"></property>
 		</bean>
 
 		</beans>

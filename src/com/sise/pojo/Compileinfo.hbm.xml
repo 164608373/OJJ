@@ -8,10 +8,31 @@
     <class name="com.sise.pojo.Compileinfo" table="compileinfo" catalog="test">
         <id name="solutionId" type="java.lang.Integer">
             <column name="solution_id" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <property name="error" type="java.lang.String">
             <column name="error" length="65535" />
+        </property>
+        <property name="userId" type="java.lang.Integer">
+            <column name="user_id" not-null="true" />
+        </property>
+        <property name="problemId" type="java.lang.Integer">
+            <column name="problem_id" not-null="true" />
+        </property>
+        <property name="language" type="java.lang.String">
+            <column name="language" length="45" not-null="true" />
+        </property>
+        <property name="submitTime" type="java.sql.Timestamp">
+            <column name="submit_time" length="19" not-null="true" />
+        </property>
+        <property name="codeLength" type="java.lang.Integer">
+            <column name="code_length" not-null="true" />
+        </property>
+        <property name="time" type="java.lang.Integer">
+            <column name="time" not-null="true" />
+        </property>
+        <property name="result" type="java.lang.Integer">
+            <column name="result" not-null="true" />
         </property>
     </class>
 </hibernate-mapping>

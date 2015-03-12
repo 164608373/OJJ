@@ -1,8 +1,10 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="gbk"  contentType="text/html;charset=gbk"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+request.setCharacterEncoding("gbk");
+response.setCharacterEncoding("gbk");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -10,7 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>æäº¤é—®é¢˜é¡µé¢</title>
+    <title>Ìá½»ÎÊÌâÒ³Ãæ</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -23,16 +25,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" src="js/index.js"></script>
 	<script type="text/javascript">
 $(document).ready(function(){
- //ç™»é™†äº‹ä»¶
+ //µÇÂ½ÊÂ¼ş
   $("#login").click(function(){
- 	var id=$("#username").val(); //è·å–id
- 	var pass=$("#password").val();//è·å–å¯†ç 
- 	//alert(id+":"+pass); è°ƒè¯•
+ 	var id=$("#username").val(); //»ñÈ¡id
+ 	var pass=$("#password").val();//»ñÈ¡ÃÜÂë
+ 	//alert(id+":"+pass); µ÷ÊÔ
  	var url = "users_login.action?&userName="+id+"&password="+pass;
  	window.location.href=url;
    });
    
-  //æ³¨å†Œ
+  //×¢²á
   $("#register").click(function(){
  	var url = "Register.jsp";
  	window.location.href=url;
@@ -52,25 +54,25 @@ $(document).ready(function(){
    <td>User</td>
   </tr>
   <tr align="center">
-  <td><a href="board_queryPage.action">ç•™è¨€æ¿</a></td>
-  <td><a href="problem_queryProblemuser.action">é—®é¢˜</a></td>
-  <td><a href="Register.jsp">æ³¨å†Œ</a></td>
+  <td><a href="board_queryPage.action">ÁôÑÔ°å</a></td>
+  <td><a href="problem_queryProblemuser.action">ÎÊÌâ</a></td>
+  <td><a href="Register.jsp">×¢²á</a></td>
   <c:if test="${sessionScope.user != null}"><td>welcome</td></c:if>
   <c:if test="${sessionScope.user == null}"><td>Id<input id="username" name="userName" type="text"></td></c:if>
   </tr>
   <tr  align="center">
-  <td><a href="">ä¸»é¡µ</a></td>
-  <td><a href="">æäº¤é—®é¢˜</a></td>
-  <td><a href="users_loginCheck.action">ä¿®æ”¹ç”¨æˆ·ä¿¡æ¯</a></td>
+  <td><a href="">Ö÷Ò³</a></td>
+  <td><a href="">Ìá½»ÎÊÌâ</a></td>
+  <td><a href="users_loginCheck.action">ĞŞ¸ÄÓÃ»§ĞÅÏ¢</a></td>
   <c:if test="${sessionScope.user != null}"><td><a href="">${sessionScope.user.userId}</a></td></c:if>
-   <c:if test="${sessionScope.user == null}"><td>å¯† ç <input id="password" name="password" type="password"></td></c:if>
+   <c:if test="${sessionScope.user == null}"><td>ÃÜ Âë<input id="password" name="password" type="password"></td></c:if>
   </tr>
   <tr  align="center">
   <td><a href="">FAQ</a></td>
-  <td><a href="">æäº¤çŠ¶æ€</a></td>
-   <td><a href="">æ’è¡Œæ¦œ</a></td>
+  <td><a href="">Ìá½»×´Ì¬</a></td>
+   <td><a href="">ÅÅĞĞ°ñ</a></td>
   <c:if test="${sessionScope.user != null}"><td><a href="users_logout.action">logout</a></td></c:if>
-  <c:if test="${sessionScope.user == null}"><td><button id="login">ç™»é™†</button><button id="register">æ³¨å†Œ</button></td></c:if>
+  <c:if test="${sessionScope.user == null}"><td><button id="login">µÇÂ½</button><button id="register">×¢²á</button></td></c:if>
   </tr>
   <tr  align="center">
   <td><a href="">a</a></td>
@@ -83,10 +85,10 @@ $(document).ready(function(){
   
   
     <table border="0" width="980" ><tbody><tr><td>
-<form method="POST" action="./submit">
+<form method="POST" action="rejudge_run.action">
 <p align="center"><font size="4" color="#333399">Submit Your Solution Via Web</font></p>
 <p align="center">
-Problem ID:<input type="text" name="problem_id" value="${problem.problemId}" size="20" accesskey="p" disabled="disabled"><br>
+Problem ID:<input type="text" name="problem_id" value="${problem.problemId}" size="20" accesskey="p" readonly="readonly"><br>
 Language:<select size="1" name="language" style="width:100;" >
 <option value="0" >G++</option>
 <option value="1">GCC</option>
@@ -94,7 +96,7 @@ Language:<select size="1" name="language" style="width:100;" >
 </select><br>
 </p><p align="center">
 Source: <br>
-<textarea rows="30" name="source" cols="79" accesskey="c"></textarea></p>
+<textarea rows="30" name="submitCode" cols="79" accesskey="c"></textarea></p>
 <div align="center">
 <pre><input type="submit" value="Submit" name="submit" accesskey="s"><input type="reset" value="Reset" name="reset"></pre>
 </div>

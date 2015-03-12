@@ -1,8 +1,10 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"  contentType="text/html;charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+request.setCharacterEncoding("UTF-8");
+response.setCharacterEncoding("UTF-8");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -81,7 +83,53 @@ $(document).ready(function(){
   </table>
   <br>
   
-  
-    主页内容<br>
+  <table width="780">
+  <tr align="center" ><td>Runid</td><td>submit time</td><td>status</td><td>问题ID</td><td>执行时间</td><td>代码长度</td><td>语言</td></tr>
+  			<tr>
+  				<c:forEach  items="${lists}" var="com" >
+				<tr >
+					<th>${com.solutionId}</th>
+					<th>${com.submitTime}</th>
+					<th>${com.result}</th>
+					<th>${com.problemId}</th>
+					<th>${com.time}ms</th>
+					<th>${com.codeLength}B</th>
+					<th>${com.language}</th>
+				</tr>
+					</c:forEach>
+			</tr>
+  			<tr>
+  				<th colspan="3"><center>
+  					<a href="compileinfo_pageQuery.action?curPage=1" style='TEXT-DECORATION:none;'>&nbsp;首页&nbsp;</a>
+    <a href="compileinfo_pageQuery.action?curPage=${page.currentPage-1 }" style='TEXT-DECORATION:none;'>&nbsp;上一页&nbsp;</a>
+    <a href="compileinfo_pageQuery.action?curPage=${page.currentPage+1 }" style='TEXT-DECORATION:none;'>&nbsp;下一页&nbsp;</a>
+    <a href="compileinfo_pageQuery.action?curPage=${page.totalPage }" style='TEXT-DECORATION:none;'>&nbsp;尾页&nbsp;</a>
+   	<script type="text/javascript">
+   		function goPage(sel){
+   			location.href='compileinfo_pageQuery.action?curPage='+sel.value;
+   		}
+   	</script> 
+    当前是第
+    <select onchange="goPage(this)">
+	    <c:forEach begin="1" end="${page.totalPage }" var="v">
+	    	<c:if test="${v == page.currentPage}">
+	    		<option value="${v }" selected="selected">${v }</option>
+	    	</c:if>
+	    	<c:if test="${v != page.currentPage}">
+	    		<option value="${v }" >${v }</option>
+	    	</c:if>
+	    </c:forEach>
+    </select> 
+    页 
+  				</center></th>
+  			</tr>
+  			
+  			<tr>
+  				<th colspan="3">
+  					总页数:【${page.totalPage }】页&nbsp;总条数:【${page.totalCount }】条
+  				</th>
+  			</tr>
+  			
+  		</table>
   </body>
 </html>
