@@ -8,19 +8,19 @@
     <class name="com.sise.pojo.Problem" table="problem" catalog="test">
         <id name="problemId" type="java.lang.Integer">
             <column name="problem_id" />
-            <generator class="identity" />
+            <generator class="assigned" />
         </id>
         <property name="title" type="java.lang.String">
             <column name="title" length="200" not-null="true" />
         </property>
         <property name="description" type="java.lang.String">
-            <column name="description" length="65535" />
+            <column name="description" />
         </property>
         <property name="input" type="java.lang.String">
-            <column name="input" length="65535" />
+            <column name="input" />
         </property>
         <property name="output" type="java.lang.String">
-            <column name="output" length="65535" />
+            <column name="output" />
         </property>
         <property name="inputPath" type="java.lang.String">
             <column name="input_path" />
@@ -29,13 +29,13 @@
             <column name="output_path" />
         </property>
         <property name="sampleInput" type="java.lang.String">
-            <column name="sample_input" length="65535" />
+            <column name="sample_input" />
         </property>
         <property name="sampleOutput" type="java.lang.String">
-            <column name="sample_output" length="65535" />
+            <column name="sample_output" />
         </property>
         <property name="hint" type="java.lang.String">
-            <column name="hint" length="65535" />
+            <column name="hint" />
         </property>
         <property name="inDate" type="java.sql.Timestamp">
             <column name="in_date" length="19" />
@@ -66,6 +66,24 @@
         </property>
         <property name="solved" type="java.lang.Integer">
             <column name="solved" />
+        </property>
+        <property name="test1Input" type="java.lang.String">
+            <column name="test1_input" />
+        </property>
+        <property name="test1Output" type="java.lang.String">
+            <column name="test1_output" />
+        </property>
+        <property name="test2Input" type="java.lang.String">
+            <column name="test2_input" />
+        </property>
+        <property name="test2Output" type="java.lang.String">
+            <column name="test2_output" />
+        </property>
+        <property name="test3Input" type="java.lang.String">
+            <column name="test3_input" />
+        </property>
+        <property name="test3Output" type="java.lang.String">
+            <column name="test3_output" />
         </property>
     </class>
 </hibernate-mapping>

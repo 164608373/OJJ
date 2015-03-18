@@ -30,6 +30,12 @@ public class Problem implements java.io.Serializable {
 	private Short difficulty;
 	private Integer submitUser;
 	private Integer solved;
+	private String test1Input;
+	private String test1Output;
+	private String test2Input;
+	private String test2Output;
+	private String test3Input;
+	private String test3Output;
 
 	// Constructors
 
@@ -38,8 +44,9 @@ public class Problem implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Problem(String title, Integer timeLimit, Integer memoryLimit,
-			Short ratio, Short difficulty) {
+	public Problem(Integer problemId, String title, Integer timeLimit,
+			Integer memoryLimit, Short ratio, Short difficulty) {
+		this.problemId = problemId;
 		this.title = title;
 		this.timeLimit = timeLimit;
 		this.memoryLimit = memoryLimit;
@@ -48,12 +55,15 @@ public class Problem implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Problem(String title, String description, String input,
-			String output, String inputPath, String outputPath,
+	public Problem(Integer problemId, String title, String description,
+			String input, String output, String inputPath, String outputPath,
 			String sampleInput, String sampleOutput, String hint,
 			Timestamp inDate, Integer timeLimit, Integer memoryLimit,
 			Integer accepted, Integer submit, Short ratio, Integer error,
-			Short difficulty, Integer submitUser, Integer solved) {
+			Short difficulty, Integer submitUser, Integer solved,
+			String test1Input, String test1Output, String test2Input,
+			String test2Output, String test3Input, String test3Output) {
+		this.problemId = problemId;
 		this.title = title;
 		this.description = description;
 		this.input = input;
@@ -73,6 +83,12 @@ public class Problem implements java.io.Serializable {
 		this.difficulty = difficulty;
 		this.submitUser = submitUser;
 		this.solved = solved;
+		this.test1Input = test1Input;
+		this.test1Output = test1Output;
+		this.test2Input = test2Input;
+		this.test2Output = test2Output;
+		this.test3Input = test3Input;
+		this.test3Output = test3Output;
 	}
 
 	// Property accessors
@@ -235,6 +251,54 @@ public class Problem implements java.io.Serializable {
 
 	public void setSolved(Integer solved) {
 		this.solved = solved;
+	}
+
+	public String getTest1Input() {
+		return this.test1Input;
+	}
+
+	public void setTest1Input(String test1Input) {
+		this.test1Input = test1Input;
+	}
+
+	public String getTest1Output() {
+		return this.test1Output;
+	}
+
+	public void setTest1Output(String test1Output) {
+		this.test1Output = test1Output;
+	}
+
+	public String getTest2Input() {
+		return this.test2Input;
+	}
+
+	public void setTest2Input(String test2Input) {
+		this.test2Input = test2Input;
+	}
+
+	public String getTest2Output() {
+		return this.test2Output;
+	}
+
+	public void setTest2Output(String test2Output) {
+		this.test2Output = test2Output;
+	}
+
+	public String getTest3Input() {
+		return this.test3Input;
+	}
+
+	public void setTest3Input(String test3Input) {
+		this.test3Input = test3Input;
+	}
+
+	public String getTest3Output() {
+		return this.test3Output;
+	}
+
+	public void setTest3Output(String test3Output) {
+		this.test3Output = test3Output;
 	}
 
 }

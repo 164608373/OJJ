@@ -26,10 +26,12 @@
 			<result name="queryOk">updateproblem.jsp</result>
 			<result name="updateProblemOk">updateproblemok.jsp</result>
 			<result name="presubmit">submit.jsp</result>
+			<result name="addproblemFail">addproblemFail.jsp</result>
 		</action>
 		
 		<!--judgeAction -->
 		<action name="rejudge_*" class="rejudge" method="{1}">
+		 <result name="submitFail">login.jsp</result>
 		</action>
 		
 		<!-- boardAction -->
@@ -38,6 +40,12 @@
 		         <result name="postSuccess">querypageMessage.jsp</result>
 		         <result name="queryMessageSucced">board.jsp</result>
 		</action>
+		
+		<!--compileinfoAction -->
+		<action name="compileinfo_*" class="CompileinfoAction" method="{1}">
+		   <result name="pagequeryok">status.jsp</result>
+		</action>
+		
 	</package>
 
 </struts>    
