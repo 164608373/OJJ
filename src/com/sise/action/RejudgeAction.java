@@ -94,10 +94,17 @@ public class RejudgeAction extends ActionSupport {
 		compileinfo.setSubmitTime(new Timestamp(System.currentTimeMillis()));
 		compileinfo.setProblemId(Integer.valueOf(problem_id));
 		compileinfo.setLanguage("gcc");
+<<<<<<< HEAD
 		
 		//根据问题ID获取问题对象
 		Problem problem = problemService.queryProblem(problem_id);
 		
+=======
+		
+		//根据问题ID获取问题对象
+		Problem problem = problemService.queryProblem(problem_id);
+		
+>>>>>>> origin/master
 		//把提交的代码写入inputpath = "D:/data/temp/temp.c"文件中
 		write(inputpath, submitCode+"\r\n");
 		
@@ -121,15 +128,21 @@ public class RejudgeAction extends ActionSupport {
 			//编译成功
 			System.out.println("编译成功!");
 			
+<<<<<<< HEAD
 			/**
 			 * 根据问题id找出测试用的测试输入输出用例
 			 */
 			String testdirpath = "D:\\data\\test\\"+problem_id;
+=======
+			//把预输入的写到inputpath文件中
+			write(inPath,problem.getSampleInput());
+>>>>>>> origin/master
 			
 			FileTool fileTool = new FileTool();
 			
 			int dirlength = fileTool.getDirLength(testdirpath);
 			
+<<<<<<< HEAD
 			int testRound = 0;
 			
 			if(dirlength == 2)
@@ -209,12 +222,47 @@ public class RejudgeAction extends ActionSupport {
 				System.out.println("Output Limit Exceeded");
 				return null;
 			}
+=======
+			long endTime=System.currentTimeMillis(); 
 			
+			Long runTime=endTime-startTime;
+			
+			System.out.println("程序运行时间： "+runTime+"ms");
+			//输入
+			writeprocessInput(p,problem.getSampleInput());
+			
+			String runrs = readProcessOutput(p);
+			//把执行程序结果写入文件
+			write(in,runrs);
+			
+			//再把题目的预期结果写入文件
+			write(out,problem.getSampleOutput());
+>>>>>>> origin/master
+			
+			//判断是否超过限制时间
+			if(problem.getTimeLimit() < runTime.intValue()){
+				compileinfo.setError("");
+				compileinfo.setResult(3);
+				compileinfo.setTime(runTime.intValue());
+				compileinfo.setCodeLength(codelength.intValue());
+				compileinfoService.addComp(compileinfo);
+				System.out.println("Output Limit Exceeded");
+				return null;
+			}
+			
+				
 			//对比两个文件是否相同
+<<<<<<< HEAD
 			if(flag){
 				compileinfo.setError("");
 				compileinfo.setResult(1);
 				compileinfo.setTime(run.intValue());
+=======
+			if(CompareFile.isFileContentEqual(in, out)){
+				compileinfo.setError("");
+				compileinfo.setResult(1);
+				compileinfo.setTime(runTime.intValue());
+>>>>>>> origin/master
 				compileinfo.setCodeLength(codelength.intValue());
 				compileinfoService.addComp(compileinfo);
 				System.out.println("accept");
@@ -224,7 +272,11 @@ public class RejudgeAction extends ActionSupport {
 				compileinfo.setError("");
 				compileinfo.setResult(2);
 				compileinfo.setCodeLength(codelength.intValue());
+<<<<<<< HEAD
 				compileinfo.setTime(run.intValue());
+=======
+				compileinfo.setTime(runTime.intValue());
+>>>>>>> origin/master
 				compileinfoService.addComp(compileinfo);
 				System.out.println("wrong answer");
 				return null;

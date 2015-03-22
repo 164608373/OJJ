@@ -34,7 +34,11 @@ public class CompileinfoService implements ICompileinfoService {
 	 * @throws Exception
 	 */
 	public List<Compileinfo> queryPage(Page page) throws Exception{
+<<<<<<< HEAD
 		String hql = "From Compileinfo order by submitTime desc";
+=======
+		String hql = "From Compileinfo ";
+>>>>>>> origin/master
 		List<Compileinfo> list = null;
 	    list =(List<Compileinfo>) compileinfoDao.queryPage(hql, page);
 		return list;

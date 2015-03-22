@@ -1,16 +1,22 @@
 package com.sise.util;
 
+<<<<<<< HEAD
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+=======
+import java.io.BufferedWriter;
+import java.io.File;
+>>>>>>> origin/master
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class FileTool {
 	private boolean flag;
 	private File file;
+<<<<<<< HEAD
 	/**
 	 * 获取文件内容
 	 * @param path
@@ -63,6 +69,9 @@ public class FileTool {
 		   }
 		  }
 		 }
+=======
+
+>>>>>>> origin/master
 	
 	/**
 	 * 给文件写内容
