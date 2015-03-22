@@ -1,0 +1,30 @@
+#
+#Wed Feb 26 22:16:41 CST 2003
+WelcomePage=/JudgeOnline/index.acm
+RootPath=/JudgeOnline/
+DefaultTitle=Welcome to JudgeOnline
+
+LangCount=3
+LanguageDescs=G++,GCC,Pascal
+LanguageExtMemory=868,868,1140
+LanguageExtTime=0,0,0
+LanguageExts=cc,c,pas
+LanguageExes=exe,exe,exe
+LanguageTimeFactor=1,1,1
+CompileStreamOrder=1,1,0
+
+G++CompileCmd=C\:\\JudgeOnline\\bin\\gcc\\bin\\g++.exe -fno-asm -s -w -O1 -DONLINE_JUDGE -o %PATH%%NAME% %PATH%%NAME%.%EXT%
+GCCCompileCmd=C\:\\JudgeOnline\\bin\\gcc\\bin\\gcc.exe -fno-asm -s -w -O1 -DONLINE_JUDGE -o %PATH%%NAME% %PATH%%NAME%.%EXT%
+PascalCompileCmd=C\:\\JudgeOnline\\bin\\fpc\\fpc.exe -Sg -dONLINE_JUDGE %PATH%%NAME%.%EXT%
+
+WorkingPath=C\:\\temp
+DataFilesPath=D\:\\data
+DeleteTempFile=TRUE
+RunShell=C\:\\JudgeOnline\\bin\\run.exe
+ComShell=C\:\\JudgeOnline\\bin\\com.exe
+AdminName=admin
+AdminEmail=admin@admin.net
+
+Debug=FALSE
+DebugFile=C\:\\debug.txt
+#ErrFile=C\:\\err.txt

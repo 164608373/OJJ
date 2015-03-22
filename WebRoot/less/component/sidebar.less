@@ -1,0 +1,51 @@
+//
+// Side-bar
+
+//basic class
+.sidebar-container {
+    position: relative;
+}
+.side-bar {
+    width: inherit;
+    font-size: 12px;
+    background: @sidebar-bg;
+    padding: @sidebar-padding;
+    margin: @sidebar-margin;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    z-index: 0;
+    overflow: scroll;
+    
+    .nav > li {
+        color: @sidebar-base-text-color;
+        font-weight: 200;
+        a {
+            &:hover,
+            &:focus {
+                border-left: 3px solid @brand-primary;
+            }
+        }
+        &.active > a {
+            &,
+            &:hover,
+            &:focus {
+                background-color: @sidebar-link-hover-bg;
+            }
+        }
+        a {
+            color: #fff;
+            margin: @sidenav-margin;
+            padding: @sidenav-padding;
+            &:hover,
+            &:focus {
+                background-color: @sidebar-link-hover-bg;
+            }
+        }
+    }
+    
+    //sidebar-brand
+    .sidebar-brand {
+        color: @brand-primary;
+    }
+}

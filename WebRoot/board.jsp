@@ -1,10 +1,8 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"  contentType="text/html;charset=utf-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-request.setCharacterEncoding("utf-8");
-response.setCharacterEncoding("utf-8");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -13,14 +11,16 @@ response.setCharacterEncoding("utf-8");
     <base href="<%=basePath%>">
     
     <title>留言板</title>
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
+	
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	
 	<script src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/index.js"></script>
 	<script type="text/javascript">
@@ -40,18 +40,13 @@ $(document).ready(function(){
  	window.location.href=url;
    }); 
    
-   
-    $("#postmessageBtn").click(function(){
- 	var url = "post.jsp";
- 	window.location.href=url;
-   }); 
 });
 </script>
   </head>
   
   <body>
   
-  <table border="1">
+<%--   <table border="1">
   <tr>
   <td>online judge</td>
   <td>Problem Set</td>
@@ -88,53 +83,145 @@ $(document).ready(function(){
   </table>
   <br>
   
-  <button id="postmessageBtn">发布留言</button>
   
-  <table width="780">
-  <tr align="center" ><td>发表ID</td><td>发表内容</td><td>发表时间</td></tr>
-  			<tr>
-  				<c:forEach  items="${boardlist}" var="message" >
-				<tr >
-					<th>${message.userId}</th>
-					<th>${message.message}</th>
-					<th>${message.posttime}</th>
-				</tr>
-					</c:forEach>
-			</tr>
-  			<tr>
-  				<th colspan="3"><center>
-  					<a href="board_queryPage.action?curPage=1" style='TEXT-DECORATION:none;'>&nbsp;首页&nbsp;</a>
-    <a href="board_queryPage.action?curPage=${page.currentPage-1 }" style='TEXT-DECORATION:none;'>&nbsp;上一页&nbsp;</a>
-    <a href="board_queryPage.action?curPage=${page.currentPage+1 }" style='TEXT-DECORATION:none;'>&nbsp;下一页&nbsp;</a>
-    <a href="board_queryPage.action?curPage=${page.totalPage }" style='TEXT-DECORATION:none;'>&nbsp;尾页&nbsp;</a>
-   	<script type="text/javascript">
-   		function goPage(sel){
-   			location.href='board_queryPage.action?curPage='+sel.value;
-   		}
-   	</script> 
-    当前是第
-    <select onchange="goPage(this)">
-	    <c:forEach begin="1" end="${page.totalPage }" var="v">
-	    	<c:if test="${v == page.currentPage}">
-	    		<option value="${v }" selected="selected">${v }</option>
-	    	</c:if>
-	    	<c:if test="${v != page.currentPage}">
-	    		<option value="${v }" >${v }</option>
-	    	</c:if>
-	    </c:forEach>
-    </select> 
-    页 
-  				</center></th>
-  			</tr>
-  			
-  			<tr>
-  				<th colspan="3">
-  					总页数:【${page.totalPage }】页&nbsp;总条数:【${page.totalCount }】条
-  				</th>
-  			</tr>
-  			
-  		</table>
-  
-   
+    主页内容<br> --%>
+    		<!-- new -->
+     		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-2 sidebar-container">
+					<div class="side-bar">
+						<div class="sidebar-brand">
+							<h1><span class="glyphicon glyphicon-fire"></span></h1>
+						</div>
+						<ul class="nav nav-stacked">
+							<li>Home
+								<ul class="nav nav-stacked">
+									<li  role="presentation">
+										<a href="board_queryPage.action">
+											<span class="glyphicon glyphicon-list-alt"></span> 留言板
+										</a>
+									</li>
+									<li class="active" role="presentation">
+										<a href="index.jsp">
+											<span class="glyphicon glyphicon-home"></span> 主页
+										</a>
+									</li>
+									<li role="presentation">
+										<a href="FAQ.jsp">
+											<span class="glyphicon glyphicon-question-sign"></span> FAQ
+										</a>
+									</li>
+								</ul>
+							</li>
+							<li>Porfile
+								<ul class="nav nav-stacked">
+									<li role="presentation">
+										<a href="problem_queryProblemuser.action">
+											<span class="glyphicon glyphicon-text-background"></span> 问题
+										</a>
+									</li>
+									<li role="presentation">
+										<a href="">
+											<span class="glyphicon glyphicon-edit"></span> 提交问题
+										</a>
+									</li>
+									<li role="presentation">
+										<a href="compileinfo_pageQuery.action">
+											<span class="glyphicon glyphicon-paste"></span> 提交状态
+										</a>
+									</li>
+								</ul>
+							</li>
+							<li>Message
+								<ul class="nav nav-stacked">
+									<li role="presentation">
+										<a href="Register.jsp">
+											<span class="glyphicon glyphicon-check"></span> 注册
+										</a>
+									</li>
+									<li role="presentation">
+										<a href="users_loginCheck.action">
+											<span class="glyphicon glyphicon-user"></span> 修改用户信息
+										</a>
+									</li>
+									<li role="presentation">
+										<a href="">
+											<span class="glyphicon glyphicon-flag"></span> 排行榜
+										</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-10 nopd">
+					<nav class="navbar navbar-ojj">
+						<div class="container-fluid">
+							 <c:if test="${sessionScope.user != null}">
+							 <ul class="nav navbar-nav navbar-right">
+								<li><p class="navbar-text">Hi~</p></li>
+								<li><a href="">用户：${sessionScope.user.userId}</a>
+								<li><a href="users_logout.action">注销</a>
+							</ul>
+							 </c:if>
+							<c:if test="${sessionScope.user == null}">
+							<ul class="nav navbar-nav navbar-right">
+								<li><a href="login.jsp">登录</a>
+								</li>
+								<li><a href="Register.jsp">注册</a></li>
+							</ul>
+							 </c:if>
+						</div>
+					</nav>
+
+					<div class="content">
+						<h3><span class="glyphicon glyphicon-list-alt"></span> 留言板</h3>
+
+						<div class="main-content">
+							<table class="table table-striped">
+								<tr><th>
+									<td>用户ID</td>
+									<td>发表内容</td>
+									<td>发表时间</td>
+								</th></tr>
+					  			<c:forEach  items="${boardlist}" var="message" >
+								<tr><th>
+										<td>${message.userId}</td>
+										<td>${message.message}</td>
+										<td>${message.posttime}</td>
+								</tr></th>
+								</c:forEach>
+								
+							</table>
+							<script type="text/javascript">
+						   		function goPage(sel){
+						   			location.href='board_queryPage.action?curPage='+sel.value;
+						   		}
+						   	</script> 
+							当前是第  ${page.currentPage }页
+							
+							<div class="btn-toolbar pull-right">
+								<div class="btn-group">
+									<button class="btn btn-default" onclick="location.href='board_queryPage.action?curPage=${page.currentPage-1 }';">上一页</button>
+								</div>
+								<div class="btn-group" role="group" aria-label="...">
+  									<c:forEach begin="1" end="${page.totalPage }" var="v">
+							    	<button type="button" class="btn btn-default" onclick="location.href='board_queryPage.action?curPage=${v}'">${v}</button>
+							    	</c:forEach>
+								</div>
+								<div class="btn-group">
+									<button class="btn btn-default" onclick="location.href='board_queryPage.action?curPage=${page.currentPage+1 }';">下一页</button>
+									<button class="btn btn-default" onclick="location.href='post.jsp';">发布留言</button>
+								</div>
+								
+								
+								
+							</div>
+					</div>
+
+				</div>
+		</div>
+		</div>
+    
   </body>
 </html>

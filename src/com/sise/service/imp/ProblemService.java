@@ -68,4 +68,14 @@ public class ProblemService implements IProblemService{
 	public Problem queryProblem(String id){
 		return (Problem) problemDao.query("From Problem p where p.problemId="+id).get(0);
 	}
+	
+	/**
+	 * 根据ID查看问题是否存在
+	 */
+	public boolean existProblem(String id){
+		if(0 == problemDao.query("From Problem p where p.problemId="+id).size()){
+			return false;
+		}
+		return true;
+	}
 }

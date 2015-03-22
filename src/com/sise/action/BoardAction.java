@@ -75,8 +75,7 @@ public class BoardAction extends ActionSupport{
 	 */
 	public String queryPage(){
 		//获取当前页数
-				 page=new Page();
-				
+		page=new Page();
 				
 				int totalCount = 0;
 				//获取有多少条留言

@@ -22,86 +22,132 @@ response.setCharacterEncoding("UTF-8");
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-	<script type="text/javascript" src="js/login.js"></script>
-	<script src="js/jquery.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	
+	
 	<script type="text/javascript" src="js/index.js"></script>
-	<script type="text/javascript">
-$(document).ready(function(){
- //登陆事件
-  $("#login").click(function(){
- 	var id=$("#username").val(); //获取id
- 	var pass=$("#password").val();//获取密码
- 	//alert(id+":"+pass); 调试
- 	var url = "users_login.action?&userName="+id+"&password="+pass;
- 	window.location.href=url;
-   });
-   
-  //注册
-  $("#register").click(function(){
- 	var url = "Register.jsp";
- 	window.location.href=url;
-   }); 
-   
-});
-</script>
   </head>
   
   <body>
-  <table border="1">
-  <tr>
-  <td>online judge</td>
-  <td>Problem Set</td>
-   <td>Authors</td>
-   <td>User</td>
-  </tr>
-  <tr align="center">
-  <td><a href="board_queryPage.action">留言板</a></td>
-  <td><a href="problem_queryProblemuser.action">问题</a></td>
-  <td><a href="user/Register.jsp">注册</a></td>
-  <c:if test="${sessionScope.user != null}"><td>welcome</td></c:if>
-  <c:if test="${sessionScope.user == null}"><td>Id<input id="username" name="userName" type="text"></td></c:if>
-  </tr>
-  <tr  align="center">
-  <td><a href="">主页</a></td>
-  <td><a href="">提交问题</a></td>
-  <td><a href="">修改用户信息</a></td>
-  <c:if test="${sessionScope.user != null}"><td><a href="">${sessionScope.user.userId}</a></td></c:if>
-   <c:if test="${sessionScope.user == null}"><td>密 码<input id="password" name="password" type="password"></td></c:if>
-  </tr>
-  <tr  align="center">
-  <td><a href="">FAQ</a></td>
-  <td><a href="">提交状态</a></td>
-   <td><a href="">排行榜</a></td>
-  <c:if test="${sessionScope.user != null}"><td><a href="users_logout.action">logout</a></td></c:if>
-  <c:if test="${sessionScope.user == null}"><td><button id="login">登陆</button><button id="register">注册</button></td></c:if>
-  </tr>
-  <tr  align="center">
-  <td><a href="">a</a></td>
-  <td><a href="">a</a></td>
-  <td><a href="">a</a></td>
-   <td><a href="">a</a></td>
-  </tr>
-  </table>
-  <br>
-  	<form action="users_login.action" method="post">
-  	<table border="1" align="center">
-  		<tr>
-  		<td>I d：</td><td><input id="username" name="userName" type="text"></td>
-  		</tr>
-  		<tr>
-  		<td>密  码：</td><td><input id="password" name="password" type="password"></td>
-  		</tr>
-  		<tr>
-  			<td colspan="2" align="right"><input type="button" value="提交" onclick="submit()"/><input type="button" value="重置"/></td>
-  		</tr>
+  <div class="container-fluid">
+			<div class="row">
+				<div class="col-md-2 sidebar-container">
+					<div class="side-bar">
+						<div class="sidebar-brand">
+							<h1><span class="glyphicon glyphicon-fire"></span></h1>
+						</div>
+						<ul class="nav nav-stacked">
+							<li>Home
+								<ul class="nav nav-stacked">
+									<li  role="presentation">
+										<a href="board_queryPage.action">
+											<span class="glyphicon glyphicon-list-alt"></span> 留言板
+										</a>
+									</li>
+									<li  role="presentation">
+										<a href="index.jsp">
+											<span class="glyphicon glyphicon-home"></span> 主页
+										</a>
+									</li>
+									<li role="presentation">
+										<a href="">
+											<span class="glyphicon glyphicon-question-sign"></span> FAQ
+										</a>
+									</li>
+								</ul>
+							</li>
+							<li>Porfile
+								<ul class="nav nav-stacked">
+									<li role="presentation">
+										<a href="problem_queryProblemuser.action">
+											<span class="glyphicon glyphicon-text-background"></span> 问题
+										</a>
+									</li>
+									<li role="presentation">
+										<a href="">
+											<span class="glyphicon glyphicon-edit"></span> 提交问题
+										</a>
+									</li>
+									<li role="presentation">
+										<a href="compileinfo_pageQuery.action">
+											<span class="glyphicon glyphicon-paste"></span> 提交状态
+										</a>
+									</li>
+								</ul>
+							</li>
+							<li>Message
+								<ul class="nav nav-stacked">
+									<li role="presentation">
+										<a href="Register.jsp">
+											<span class="glyphicon glyphicon-check"></span> 注册
+										</a>
+									</li>
+									<li role="presentation">
+										<a href="users_loginCheck.action">
+											<span class="glyphicon glyphicon-user"></span> 修改用户信息
+										</a>
+									</li>
+									<li role="presentation">
+										<a href="">
+											<span class="glyphicon glyphicon-flag"></span> 排行榜
+										</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-10 nopd">
+					<nav class="navbar navbar-ojj">
+						<div class="container-fluid">
+							 <c:if test="${sessionScope.user != null}">
+							 <ul class="nav navbar-nav navbar-right">
+								<li><p class="navbar-text">Hi~</p></li>
+								<li><a href="">用户：${sessionScope.user.userId}</a>
+								<li><a href="users_logout.action">注销</a>
+							</ul>
+							 </c:if>
+							<c:if test="${sessionScope.user == null}">
+							<ul class="nav navbar-nav navbar-right">
+								<li><a href="login.jsp">登录</a>
+								</li>
+								<li><a href="Register.jsp">注册</a></li>
+							</ul>
+							 </c:if>
+						</div>
+					</nav>
 
-  	</table>
-  		<center><h3><font color="red">${requestScope.msg}</font></h3></center>
-  		<center><h3><font color="red">
-  		<c:if test="${requestScope.msg == null}">
-  		 请登录
-		</c:if>
-		</font></h3></center>
-  	</form>
+					<div class="content">
+						
+						<div class="logon-container">
+					<form  action="users_login.action" method="post">
+						<div class="logon-brand">
+							<h1 align="center">登陆</h1>
+						</div>
+  						<div class="form-group">
+    						<label for="exampleInputEmail1">Account ID</label>
+    						<input type="text" class="form-control" id="userName" name="userName" placeholder="Enter Account ID">
+  						</div>
+  						<div class="form-group">
+    						<label for="exampleInputPassword1">Password</label>
+    						<input type="password" class="form-control" id="password" name="password" placeholder="Password">
+  						</div>
+  						<button id="login" type="submit" class="btn btn-primary">登陆</button>
+  						<button id="reset" type="reset" class="btn btn-primary">重置</button>
+  						<br>
+  						<font color="red">${requestScope.msg}</font>
+  						<center><h3><font color="red">
+				  		<c:if test="${requestScope.msg == null}">
+				  		 请登录
+						</c:if>
+						</font></h3></center>
+					</form>
+				</div>
+
+					</div>
+
+				</div>
+		</div>
+		</div>
   </body>
 </html>

@@ -1,0 +1,86 @@
+//grid no padding
+.nopd {
+    padding: 0;
+}
+
+//sidebar-brand
+.sidebar-brand {
+    h1 {
+       text-align: center;
+       > .glyphicon {
+           font-size: floor((@font-size-h1 * 2));
+       }
+    }
+}
+
+//OJJ navbar
+.navbar-ojj {
+    top: 0;
+    background: lighten(@sidebar-bg, 10%);
+    
+    .nav > li {
+        a {
+            &:hover,
+            &:focus {
+                background-color: @sidebar-bg;
+                color: @brand-primary;
+            }
+        }
+    }
+}
+
+//login container
+.login {
+  position: absolute;
+}
+
+//main content: 
+.content {
+  padding: @padding-base;
+
+  h3 {
+    font-weight: 200;
+    margin-top: 0;
+    margin-bottom: @padding-base;
+  }
+}
+
+//login
+.login {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.3);
+
+  > .login-content {
+    padding: 10px 15px;
+    background: #fff;
+    overflow: hidden;
+    width: 20%;
+    margin: 0 auto;
+    position: relative;
+    top: 50px;
+    border-radius: @border-radius-base;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+
+    button {
+      margin-right: 10px;
+    }
+
+    a.link {
+      margin-top: 5px;
+    }
+
+    .close {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
+
+  .login-brand {
+    .sidebar-brand;
+    color: @gray-light;
+  }
+}

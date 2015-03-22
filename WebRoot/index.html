@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+	<!--<![endif]-->
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title></title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width">
+
+		<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+		<link rel="stylesheet" href="css/main.css">
+	</head>
+
+	<body>
+		<!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-2 sidebar-container">
+					<div class="side-bar">
+						<div class="sidebar-brand">
+							<h1><span class="glyphicon glyphicon-fire"></span></h1>
+						</div>
+						<ul class="nav nav-stacked">
+							<li>Home
+								<ul class="nav nav-stacked">
+									<li class="active" role="presentation">
+										<a href="">
+											<span class="glyphicon glyphicon-list-alt"></span> 留言板
+										</a>
+									</li>
+									<li role="presentation">
+										<a href="">
+											<span class="glyphicon glyphicon-home"></span> 主页
+										</a>
+									</li>
+									<li role="presentation">
+										<a href="">
+											<span class="glyphicon glyphicon-question-sign"></span> FAQ
+										</a>
+									</li>
+								</ul>
+							</li>
+							<li>Porfile
+								<ul class="nav nav-stacked">
+									<li role="presentation">
+										<a href="">
+											<span class="glyphicon glyphicon-text-background"></span> 问题
+										</a>
+									</li>
+									<li role="presentation">
+										<a href="">
+											<span class="glyphicon glyphicon-edit"></span> 提交问题
+										</a>
+									</li>
+									<li role="presentation">
+										<a href="">
+											<span class="glyphicon glyphicon-paste"></span> 提交状态
+										</a>
+									</li>
+								</ul>
+							</li>
+							<li>Message
+								<ul class="nav nav-stacked">
+									<li role="presentation">
+										<a href="">
+											<span class="glyphicon glyphicon-check"></span> 注册
+										</a>
+									</li>
+									<li role="presentation">
+										<a href="">
+											<span class="glyphicon glyphicon-user"></span> 修改用户信息
+										</a>
+									</li>
+									<li role="presentation">
+										<a href="">
+											<span class="glyphicon glyphicon-flag"></span> 排行榜
+										</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-10 nopd">
+					<nav class="navbar navbar-ojj">
+						<div class="container-fluid">
+							<ul class="nav navbar-nav navbar-right">
+								<li><p class="navbar-text">Hi~</p></li>
+								<li><a id="login-btn" href="">登录</a>
+								</li>
+								<li><a href="#">注册</a></li>
+							</ul>
+						</div>
+						<!-- /.navbar-collapse -->
+					<!-- /.container-fluid -->
+					</nav>
+
+					<div class="content">
+						<h3><span class="glyphicon glyphicon-list-alt"></span> 留言板</h3>
+
+						<div class="main-content">
+							<table class="table table-striped">
+								<th>
+									<td>发表ID</td>
+									<td>发表内容</td>
+									<td>发表时间</td>
+								</th>
+							</table>
+							<div class="btn-toolbar pull-right">
+								<div class="btn-group">
+									<button class="btn btn-default">上一页</button>
+								</div>
+								<div class="btn-group" role="group" aria-label="...">
+  									<button type="button" class="btn btn-default">1</button>
+									<button type="button" class="btn btn-default">2</button>
+									<button type="button" class="btn btn-default">3</button>
+								</div>
+								<div class="btn-group">
+									<button class="btn btn-default">下一页</button>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+		</div>
+		</div>
+
+		<div id="lc" class="login" style="display:none;">
+			<div class="login-content animated">
+				<form>
+					<button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>	
+					<div class="login-brand">
+						<h1><span class="glyphicon glyphicon-fire"></span></h1>
+					</div>
+					<div class="form-group">
+    					<label for="exampleInputEmail1">用户名</label>
+    					<input type="email" class="form-control" id="exampleInputEmail1" placeholder="请输入你的账号">
+  					</div>
+  					<div class="form-group">
+    					<label for="exampleInputPassword1">密码</label>
+    					<input type="password" class="form-control" id="exampleInputPassword1" placeholder="请输入密码">
+  					</div>
+  					<div>
+  						<button type="submit" class="btn btn-primary">登陆</button>
+						</form>
+						<a class="btn btn-default" href="">注册</a>
+						<a class="link pull-right" href="">忘记密码？</a>
+					</div>	
+
+				</div>
+		</div>
+
+		<script>
+			window.jQuery || document.write('<script src="js/vendor/jquery-1.9.0.min.js"><\/script>')
+		</script>
+		<script src="js/plugin.js"></script>
+	</body>
+
+</html>

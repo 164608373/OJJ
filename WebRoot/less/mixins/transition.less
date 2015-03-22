@@ -1,0 +1,20 @@
+//transition
+
+.transition(@transition, @transition-delay, @transition-duration) {
+  -webkit-transition: @transition @transition-delay @transition-duration;
+     -moz-transition: @transition @transition-delay @transition-duration;
+       -o-transition: @transition @transition-delay @transition-duration;
+          transition: @transition @transition-delay @transition-duration;
+}
+.transition-delay(@transition-delay) {
+  -webkit-transition-delay: @transition-delay;
+     -moz-transition-delay: @transition-delay;
+       -o-transition-delay: @transition-delay;
+          transition-delay: @transition-delay;
+}
+.transition-duration(@transition-duration) {
+  -webkit-transition-duration: @transition-duration;
+     -moz-transition-duration: @transition-duration;
+       -o-transition-duration: @transition-duration;
+          transition-duration: @transition-duration;
+}
